@@ -1,0 +1,21 @@
+git init .
+git add .
+git branch -m master(or optional name for your branch)
+git commit -m "say something"
+git remote add origin <you can add your branch here . in this case master > https://github.com/yousefarastoo/DRFtest.git 
+git remote set-url origin https://username:password@github.com/yousefarastoo/DRFtest.git
+git remote -r
+git push -u origin master (it should be master or other name you chose in step 3 for your branch)
+
+
+
+-----------------------------------------------------
+git branch -m some thing =====> for create a new branch
+git branch -a ============> to see all branch and current branch
+git checkout <existing branch> to chnage branch
+
+-----------------------------------------------------
+how to back to previous commit : 
+first we use git log to see all commit with hash and then we use this : 
+git reset --hard <hash commit>
+

@@ -1,0 +1,23 @@
+The bash prompt does not show the current active git branch on the project root.
+
+So adding a way to display the active git branch can help developers avoid the branching problems and code conflict with other developers some time.
+
+In this post, you will get a chance to learn how you can show your active git branch on your Linux terminal on the bash prompt.
+
+Open up your terminal and hit cd ~ to stay on the root. Open up the .bashrc file from there.
+
+Example:
+
+nano ~/.bashrc
+
+Scroll to the place where you want to paste the content.
+
+Pickup the below snippet and paste into the .bashrc file and save it.
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+Then, save the file and exit from the edit mode.
+
+After the update, you need to restart the terminal or source, and it should start working for you.

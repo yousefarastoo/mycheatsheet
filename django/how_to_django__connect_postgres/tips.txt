@@ -1,0 +1,17 @@
+in some version of django (especially django 2.2) isnt work properly with driver postgres!
+you suold change version of django or correct som issue in django file
+
+open below file :
+/home/yousef/Documents/Yousef/practice/5/django/postgres_example/1/.venv/lib/python3.10/site-packages/django/db/backends/postgresql/utils.py
+
+and do it like this : 
+
+
+from django.utils.timezone import utc
+
+
+def utc_tzinfo_factory(offset):
+    # if offset != 0:
+    #     raise AssertionError("database connection isn't set to UTC")
+    return utc
+

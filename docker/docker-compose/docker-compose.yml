@@ -1,0 +1,49 @@
+---
+
+version: "3.3"
+services:
+  database:
+    container_name: db
+    image: mysql:latest
+    hostname: db
+    domainname: db.salam.local
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: mahan100
+      MYSQL_DATABASE: test
+      MYSQL_USER: yousef
+      MYSQL_PASSWORD:  saman400
+    networks:
+      compose-test:
+  wordpress:
+    container_name: wordpress
+    image: wordpress:latest
+    hostname: wordpress
+    domainname: wp.salam.local
+    restart: always
+    ports:
+      - 127.0.0.1:8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      # WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_PASSWORD: saman400
+      WORDPRESS_DB_USER: yousef
+      WORDPRESS_DB_NAME: test
+    depends_on:
+      - database
+    healthcheck:
+      test: ["CMD","curl","-f","http://localhost"]
+      interval: 1m30s
+      timeout: 10s 
+      retries: 3
+      start_period: 40s
+    networks:
+      compose-test:
+networks:
+  compose-test:
+    external: false
+volumes:
+  db_data:
+    name: db_data 

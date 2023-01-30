@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  php_app_1:
+    image: php:8.2-fpm
+    container_name: php_app_1
+    restart: always
+    volumes:
+     - ./app:/code
+    expose:
+      - 9000
+    networks:
+      - internal
+    working_dir: /code
+  
+  server_php_app_1:
+    image: nginx
+    container_name: server_php_app_1
+    restart: always
+    ports:
+    - 8080:80
+    volumes:
+      - ./app:/code
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - internal
+    depends_on:
+      - php_app_1
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  app_date:
+    name: app_date

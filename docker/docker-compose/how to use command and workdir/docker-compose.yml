@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  server:
+    image: nginx:alpine
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    # image: nginx:test 
+    container_name: test
+    hostname: test
+    restart: always
+    ports:
+    - 8012:80
+    volumes:
+    - ./startbootstrap-sb-admin-2-gh-pages:/var/www/html
+    - ./nginx:/etc/nginx/conf.d
+    working_dir: /
+    # it should use command at the end to make container stay alive!
+    command: sh -c "ln -sf /dev/stderr var/log/nginx/error_root.log && ln -sf /dev/stdin var/log/nginx/access_root.log && mkdir Yousef && nginx -g 'daemon off;'"
+    # command: sh -c "mkdir Yousef"
+  

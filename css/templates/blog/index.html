@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+{% block nav %}
+{% for category in categories  %}
+<li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#"> {{category.title}} </a></li>
+
+{% endfor %}
+{% endblock %}
+{% block main %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            {% for article in articles %}
+                <div class="post-preview" style="text-align:justify" >
+                    <a href=" {% url 'blog:details' article.slug %} ">
+                        <h4 class="post-title"> {{article.title}} </h4>
+                        <p>تاریخ {{article.jpublished}}</p>
+                        <p class="post-subtitle"> {{article.description | truncatewords:20}} </p>
+                    </a>
+                    <p class="post-meta">منتشر شده توسط : <a href="#!">یوسف ارسطو</a></p>
+                    {% for cat in article.category_to_published.all  %}
+                    <span>#{{cat.title}} </span>
+                    {% endfor %}
+            </div>
+            {% endfor %}
+            <!-- Divider-->
+             <hr class="my-4" />
+            <!-- Pager-->
+            <div class="  mb-4">
+                {% if articles.has_next %}
+                <a class="btn btn-primary " href="{% url 'blog:home' articles.next_page_number %}">→ Older Posts </a> 
+                {% endif %}
+                {% if  articles.has_previous%}
+                <a class="btn btn-primary  ml-3" href=" {% url 'blog:home' articles.previous_page_number %} ">Newest Posts →</a>
+                {% endif %} 
+            </div> 
+        </div>
+    </div>
+</div>
+{% endblock %}

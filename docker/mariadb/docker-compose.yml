@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  mydatabase:
+    image: mariadb
+    container_name: mydatabase
+    environment:
+      - MARIADB_USER=yousef
+      - MARIADB_PASSWORD=saman400
+      - MARIADB_ROOT_PASSWORD=saman400
+      - MARIADB_DATABASE=test
+      # - MARIADB_HOST=localhost
+    ports:
+      - 3306:3306
+    # expose:
+    #   - 3306
+    volumes:
+      - ./database:/var/lib/mysql

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Sahel';
+    src: url('../fonts/Sahel.ttf');
+    font-weight: 300;
+    font-style: normal;
+    font-size: 40px;
+}
+/* then we can import file in another css file  */
+
+/* @import url(fonts.css); */
